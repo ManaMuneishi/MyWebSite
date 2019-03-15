@@ -1,5 +1,10 @@
 package ec;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.servlet.http.HttpSession;
+
 public class EcHelper {
 
 
@@ -42,7 +47,42 @@ public class EcHelper {
 		return new EcHelper();
 	}
 
+	/**
+	 * ハッシュ関数 ここはコピペした。
+	 *
+	 * @param target
+	 * @return
+	 */
+	public static String getSha256(String target) {
+		MessageDigest md = null; //何かを初期化
+		StringBuffer buf = new StringBuffer();//stringの親戚らしい
+		try {
+			md = MessageDigest.getInstance("SHA-256");//この名前の暗号があるらしい
+			md.update(target.getBytes());
+			byte[] digest = md.digest();
 
+			for (int i = 0; i < digest.length; i++) {
+				buf.append(String.format("%02x", digest[i]));
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return buf.toString();
+	}
+
+		//ほんとはobject.だがstring で書いてみよう ←かけない。というか面倒い。
+		//getattributeはobjectクラスにいるのでわざわざキャストする必要がある。わかりにくくなるのでやめよう。
+	public static Object cutSessionAttribute(HttpSession session, String str) {
+		Object test = session.getAttribute(str);
+		session.removeAttribute(str);
+
+		return test;
+	}
+	public static boolean isLoginIdValidation(String inputLoginId) {
+		if (inputLoginId.matches("[0-9a-zA-Z-_]")) { //0から9、aからz、AからZ、あと_が入力されているか否かの判定。
+			return true;
+		}
+		//elseをつけなくても動くらしい ←メソッド内で一旦returnを返してるので、次のreturnへ飛ぶことはない。のでtrueで止まるからelseはいらない。
+			return false;
+		}
 }
-
-

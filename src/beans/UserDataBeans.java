@@ -8,7 +8,7 @@ public class UserDataBeans {
 	private int id;
 	private String name;
 	private String address;
-	private int loginId;
+	private String loginId;
 	private String loginPassword;
 	private Date createDate;
 
@@ -31,10 +31,10 @@ public class UserDataBeans {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getLoginId() {
+	public String getLoginId() {
 		return loginId;
 	}
-	public void setLoginId(int loginId) {
+	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
 	public String getLoginPassword() {

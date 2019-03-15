@@ -23,8 +23,6 @@ public class Login extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 
-		//todo:ログイン失敗時のメッセージ
-
 		request.getRequestDispatcher(EcHelper.LOGIN_PAGE).forward(request, response);//短くていい
 
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
@@ -32,6 +30,6 @@ public class Login extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
 
+	}
 }
