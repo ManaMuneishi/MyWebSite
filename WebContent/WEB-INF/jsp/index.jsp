@@ -11,9 +11,9 @@
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container">
 			<br> <br>
-			<h1 class="header center red-text">ECサイト</h1>
+			<h1 class="header center red-text">ようこそ</h1>
 			<div class="row center">
-				<h5 class="header col s12 light">なんでも買える魔法のサイト</h5>
+				<h5 class="header col s12 light">なにも買えない不思議なサイトへ</h5>
 			</div>
 			<div class="row center">
 				<div class="input-field col s8 offset-s2">
@@ -28,10 +28,10 @@
 	</div>
 	<div class="container">
 		<div class="row center">
-			<h5 class=" col s12 light">おすすめ商品</h5>
+			<h5 class=" col s12 light">こちらはいかがですか?</h5>
 		</div>
 		<div class="section">
-			<!--   おすすめ商品   -->
+			<!--   ランダム商品   -->
 			<div class="row">
 				<c:forEach var="item" items="${itemList}">
 				<div class="col s12 m3">

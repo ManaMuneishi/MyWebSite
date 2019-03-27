@@ -2,11 +2,13 @@ package ec;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
-public class EcHelper {
+import beans.ItemDataBeans;
 
+public class EcHelper {
 
 	//TOPページ
 	static final String TOP_PAGE = "/WEB-INF/jsp/index.jsp";
@@ -32,6 +34,8 @@ public class EcHelper {
 	static final String USER_DATA_UPDATE_RESULT_PAGE = "/WEB-INF/jsp/userdataupdateresult.jsp";
 	//ユーザ購入履歴
 	static final String USER_BUY_HISTORY_DETAIL_PAGE = "/WEB-INF/jsp/userbuyhistorydetail.jsp";
+	//ユーザ一覧
+	static final String USER_LIST_PAGE = "/WEB-INF/jsp/userlist.jsp";
 	//ログアウト
 	static final String LOGOUT_PAGE = "/WEB-INF/jsp/logout.jsp";
 	//ログイン
@@ -72,12 +76,19 @@ public class EcHelper {
 
 		//ほんとはobject.だがstring で書いてみよう ←かけない。というか面倒い。
 		//getattributeはobjectクラスにいるのでわざわざキャストする必要がある。わかりにくくなるのでやめよう。
-	public static Object cutSessionAttribute(HttpSession session, String str) {
+	public static Object cutSessionAttribute(HttpSession session, String str) { //セッションカットこれだー！
 		Object test = session.getAttribute(str);
 		session.removeAttribute(str);
 
 		return test;
 	}
+
+	/**
+	 * ログインIDのバリデーション  //ログイン
+	 *
+	 * @param inputLoginId
+	 * @return
+	 */
 	public static boolean isLoginIdValidation(String inputLoginId) {
 		if (inputLoginId.matches("[0-9a-zA-Z-_]")) { //0から9、aからz、AからZ、あと_が入力されているか否かの判定。
 			return true;
@@ -85,4 +96,15 @@ public class EcHelper {
 		//elseをつけなくても動くらしい ←メソッド内で一旦returnを返してるので、次のreturnへ飛ぶことはない。のでtrueで止まるからelseはいらない。
 			return false;
 		}
+
+
+//商品の合計
+
+	public static int getTotalItemPrice(ArrayList<ItemDataBeans> items) {
+		int total  = 0;//初期化
+		for (ItemDataBeans i : items) { //items の長さで回す
+			total += i.getPrice();
+		}
+		return total;
+	}
 }

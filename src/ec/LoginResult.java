@@ -29,14 +29,14 @@ public class LoginResult extends HttpServlet {
 			int userId = UserDAO.getUserId(loginId,password);
 
 			if(userId !=0) {
-				session.setAttribute("isLogin", true);
+				session.setAttribute("isLogin", true);//セッションがあればisloginですよ
 				session.setAttribute("userId", userId);
 
 				//ログイン前のページを取得
 				String returnStrUrl = (String) EcHelper.cutSessionAttribute(session, "returnStrUrl");
 
 				//ログイン前ページにリダイレクト。(戻るボタン的な。)nullならindexへ。
-				response.sendRedirect(returnStrUrl!= null ? returnStrUrl:"Index");
+				response.sendRedirect(returnStrUrl!= null?returnStrUrl:"Index");
 			} else {
 				session.setAttribute("loginId", loginId);
 				session.setAttribute("loginErrorMessage", "入力内容ちがうよー");

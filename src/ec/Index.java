@@ -24,7 +24,7 @@ public class Index extends HttpServlet {
 		try {
 
 			//商品情報を取得
-			ArrayList<ItemDataBeans> itemList = ItemDAO.getRandItem(4);//トライキャッチ書かないとここで怒られる
+			ArrayList<ItemDataBeans> itemList = ItemDAO.getRandItem(4);//トライキャッチ書かないとここで怒られる//ここあとで変えようー数。
 			//スコープにセット
 			request.setAttribute("itemList",itemList);
 			//フォワード

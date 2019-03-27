@@ -44,9 +44,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">${resultBDB.formatDate}</td>
-									<td class="center">${resultBDB.deliveryMethodName}</td>
-									<td class="center">${resultBDB.totalPrice}円</td>
+									<td class="center">${bdbs.formatDate}</td>
+									<td class="center">${bdbs.deliveryMethodName}</td>
+									<td class="center">${bdbs.totalPrice}円</td>
 								</tr>
 							</tbody>
 						</table>
@@ -67,15 +67,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="buyIDB" items="${buyIDBList}" >
+								<c:forEach var="idbs" items="${ItemList}" >
 									<tr>
-										<td class="center">${buyIDB.name}</td>
-										<td class="center">${buyIDB.price}円</td>
+										<td class="center">${idbs.name}</td>
+										<td class="center">${idbs.price}円</td>
 									</tr>
 								</c:forEach>
 								<tr>
-									<td class="center">${resultBDB.deliveryMethodName}</td>
-									<td class="center">${resultBDB.deliveryMethodPrice}円</td>
+									<td class="center">${bdbs.deliveryMethodName}</td>
+									<td class="center">${bdbs.deliveryMethodPrice}円</td>
 								</tr>
 							</tbody>
 						</table>

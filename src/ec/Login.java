@@ -19,17 +19,22 @@ public class Login extends HttpServlet {
 	//ここの間にあったsuper消した
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
+		//セッション取る時は日本語にする呪文はいらないのか。
 		HttpSession session = request.getSession();
+
+		String inputLoginId =session.getAttribute("loginId")!=null?(String) EcHelper.cutSessionAttribute(session,"loginId"):"";
+//		String inputLoginId =(String)session.getAttribute("loginId");
+//		if (inputLoginId != null) {
+//			EcHelper.cutSessionAttribute(session, "loginId");
+//		}
+		String loginErrorMessage = (String)EcHelper.cutSessionAttribute(session, "loginErrorMessage");
+
+		request.setAttribute("inputLoginId", inputLoginId);
+		request.setAttribute("loginErrorMessage", loginErrorMessage);//セットしないとフォワードできないよ。
 
 		request.getRequestDispatcher(EcHelper.LOGIN_PAGE).forward(request, response);//短くていい
 
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Login.jsp");
 //		dispatcher.forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 }

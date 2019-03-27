@@ -9,20 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/Error")
+public class Error extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		session.removeAttribute("userId");//ここすぐ書けなかったところ。
+		String errorMessage = session.getAttribute("errorMessage") != null ? (String) EcHelper.cutSessionAttribute(session, "errorMessage") : "不正なアクセス";
 
-		request.getRequestDispatcher(EcHelper.LOGOUT_PAGE).forward(request, response);
+		request.setAttribute("errorMessage", errorMessage);
+		request.getRequestDispatcher(EcHelper.ERROR_PAGE).forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 }

@@ -12,6 +12,18 @@ public class UserDataBeans {
 	private String loginPassword;
 	private Date createDate;
 
+	public UserDataBeans() {
+
+	}
+
+	public UserDataBeans(int id, String name, String address, String loginId, String loginPassword, Date createDate) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.loginId = loginId;
+		this.loginPassword = loginPassword;
+		this.createDate = createDate;
+	}
 
 	public int getId() {
 		return id;

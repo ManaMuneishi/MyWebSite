@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 
 import base.DBManager;
 import beans.UserDataBeans;
@@ -52,7 +54,7 @@ public class UserDAO {
 		try {
 			con = DBManager.getConnection();
 			//password は暗号なので一旦loginidだけとる。
-			st = con.prepareStatement("SELECT * FROM t_user WHERE login_id = a");
+			st = con.prepareStatement("SELECT * FROM t_user WHERE login_id = ?");
 			st.setString(1, loginId);
 			ResultSet rs = st.executeQuery();
 
@@ -113,16 +115,73 @@ public class UserDAO {
 				}
 			}
 	}
-	private static boolean isOverlapLoginId(String loginId) {
-		boolean isOverlap = false;
+
+	//ログインIdが被ってないかどうか調べる
+	public static boolean isOverlapLoginId(String loginId) throws SQLException {//throw sです
+
+		boolean isOverlap = false; //false で初期化
 		Connection con = null;
 		PreparedStatement st = null;
 
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("");
+			st = con.prepareStatement("SELECT login_id FROM t_user WHERE login_id = ? ");
+			st.setString(1, loginId);
+			ResultSet rs = st.executeQuery();
+
+			System.out.println("seaching loginId by inputLoginId has been completed!!");
+
+			if (rs.next()) {
+				isOverlap = true;
+			}
+		}catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
 		}
+		System.out.println("overlap check has been completed");
+		return isOverlap;
 	}
+
+	//todo:ユーザ一覧する
+	public static ArrayList<UserDataBeans> UserAll() throws SQLException{
+		Connection con = null;
+		PreparedStatement st = null;
+		ArrayList<UserDataBeans> userList = new ArrayList<UserDataBeans>();
+
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement("SELECT * FROM t_user WHERE id NOT IN (2)");
+
+			ResultSet rs = st.executeQuery();
+
+			while(rs.next()) {
+				 int id = rs.getInt("id");
+				 String name = rs.getString("name");
+				 String address = rs.getString("address");
+				 String loginId = rs.getString("loginId");
+				 String loginPassword = rs.getString("loginPassword");
+				 Date createDate = rs.getDate("createDate");
+				 UserDataBeans user = new UserDataBeans(id,name,address,loginId,loginPassword,createDate);
+				 userList.add(user);
+			}
+			}catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return null;
+			} finally {
+				if (con != null) {
+					con.close();
+				}
+			}
+		return userList;
+	}
+
+
+//todo:ユーザの一人(以上)を参照する
+
+
 }
-//todo:ユーザ一覧する
-//todo:ユーザの一人を参照する

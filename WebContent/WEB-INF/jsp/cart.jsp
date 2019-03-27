@@ -48,7 +48,7 @@
 							</div>
 						</div>
 					</div>
-					<c:if test="${(status.index+1) % 4 == 0 }">
+					<c:if test="${(status.index+1) % 4 == 0 }"> <!-- ここで4つごと折り返しを設定してると思う。多分。-->
 				</div>
 				<div class="row">
 					</c:if>
