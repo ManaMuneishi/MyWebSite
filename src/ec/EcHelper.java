@@ -13,7 +13,7 @@ public class EcHelper {
 	//TOPページ
 	static final String TOP_PAGE = "/WEB-INF/jsp/index.jsp";
 	//検索結果
-	static final String ITEM_SEARCH_RESULT_PAGE = "/WEB-INF/jsp/item.jsp";
+	static final String ITEM_SEARCH_RESULT_PAGE = "/WEB-INF/jsp/itemsearchresult.jsp";
 	//商品ページ
 	static final String ITEM_PAGE = "/WEB-INF/jsp/item.jsp";
 	//エラーページ
@@ -47,6 +47,28 @@ public class EcHelper {
 	//新規登録完了
 	static final String REGIST_RESULT_PAGE = "/WEB-INF/jsp/registresult.jsp";
 
+	//ここ以下半分ベタ打ち!!
+	//マスターTOPページ
+	static final String MASTER_INDEX_PAGE = "/WEB-INF/jsp/masterindex.jsp";
+	//マスター商品新規登録
+	static final String MASTER_NEW_ITEM_PAGE  = "/WEB-INF/jsp/masternewitem.jsp";
+	//マスター商品新規登録確認
+	static final String MASTER_NEW_ITEM_CONF_PAGE  = "/WEB-INF/jsp/masternewitemconf.jsp";
+	//マスター商品情報変更
+	static final String MASTER_ITEM_UPDATE_PAGE = "/WEB-INF/jsp/masteritemupdate.jsp";
+	//マスター商品情報変更確認
+	static final String MASTER_ITEM_UPDATE_CONF_PAGE = "/WEB-INF/jsp/masteritemupdateconf.jsp";
+	//マスター商品削除確認
+	static final String MASTER_ITEM_DELETE_CONF_PAGE = "/WEB-INF/jsp/masteritemdeleteconf.jsp";
+	//マスター商品詳細
+	static final String MASTER_ITEM_DETAIL_PAGE  = "/WEB-INF/jsp/masteritemdetail.jsp";
+	//マスター商品検索結果
+	static final String MASTER_ITEM_SEARCH_RESULT_PAGE = "/WEB-INF/jsp/masteritemsearchresult.jsp";
+	//マスター商品検索画面
+	static final String MASTER_ITEM_SEARCH_PAGE = "/WEB-INF/jsp/masteritemsearch.jsp";
+	//マスター全機能共通完了ページ
+	static final String MASTER_ALL_RESULT_PAGE = "/WEB-INF/jsp/masterallresult.jsp";
+
 	public static EcHelper getInstance() {
 		return new EcHelper();
 	}
@@ -55,7 +77,6 @@ public class EcHelper {
 	 * ハッシュ関数 ここはコピペした。
 	 *
 	 * @param target
-	 * @return
 	 */
 	public static String getSha256(String target) {
 		MessageDigest md = null; //何かを初期化
@@ -75,8 +96,8 @@ public class EcHelper {
 	}
 
 		//ほんとはobject.だがstring で書いてみよう ←かけない。というか面倒い。
-		//getattributeはobjectクラスにいるのでわざわざキャストする必要がある。わかりにくくなるのでやめよう。
-	public static Object cutSessionAttribute(HttpSession session, String str) { //セッションカットこれだー！
+		//getattributeはobjectクラスにいるのでわざわざキャストする必要がある。わかりにくくなる。
+	public static Object cutSessionAttribute(HttpSession session, String str) {
 		Object test = session.getAttribute(str);
 		session.removeAttribute(str);
 
@@ -87,7 +108,6 @@ public class EcHelper {
 	 * ログインIDのバリデーション  //ログイン
 	 *
 	 * @param inputLoginId
-	 * @return
 	 */
 	public static boolean isLoginIdValidation(String inputLoginId) {
 		if (inputLoginId.matches("[0-9a-zA-Z-_]")) { //0から9、aからz、AからZ、あと_が入力されているか否かの判定。

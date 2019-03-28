@@ -23,20 +23,15 @@ public class Regist extends HttpServlet {
 		HttpSession session = request.getSession();//セッションとった
 		request.setCharacterEncoding("UTF-8");//日本語にした
 
-		//下下記これと同じ意味。
-		//UserDataBeans udb = session.getAttribute("udb") != null?(UserDataBeans) EcHelper.cutSessionAttribute(session, "udb"):new UserDataBeans();
-
-		UserDataBeans udb = (UserDataBeans)session.getAttribute("udb");//ここさえあれば動く。ifなくても平気。
-
-		if (udb != null) {
-			EcHelper.cutSessionAttribute(session, "udb");
-		}
+		//下下記これと似た意味。(後ろ無くした) ←後ろいる。下記は消した。
+		UserDataBeans udb = session.getAttribute("udb") != null?(UserDataBeans) EcHelper.cutSessionAttribute(session, "udb"):new UserDataBeans();
+		String validationMessage = (String) EcHelper.cutSessionAttribute(session, "validationMessage");
 
 		request.setAttribute("udb",udb);
+		request.setAttribute("validationMessage",validationMessage);
+
 		request.getRequestDispatcher(EcHelper.REGIST_PAGE).forward(request, response);
 
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

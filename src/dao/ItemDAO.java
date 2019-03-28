@@ -169,4 +169,75 @@ public class ItemDAO {
 			}
 		}
 	}
+
+	//todo:itemdelete機能// insertと似た感じだと思われる。
+
+
+
+	//itemupdateの機能 //下記参考にして直す。//未確認
+	public static void updateItem(ItemDataBeans idb) throws SQLException {
+		// 更新された情報をセットされたJavaBeansのリスト
+		ItemDataBeans updatedIdb = new ItemDataBeans();
+		Connection con = null;
+		PreparedStatement st = null;
+
+		try {
+			System.out.println("inserting item has been completed");
+
+			con = DBManager.getConnection();
+			st = con.prepareStatement("UPDATE m_item SET name=?, detail=?, price=? file_name=? WHERE id=?;");
+			st.setString(1, idb.getName());
+			st.setString(2, idb.getDetail());
+			st.setInt(3, idb.getPrice());
+			st.setString(4, idb.getFileName());
+			st.executeUpdate();
+			System.out.println("update has been completed");
+
+			st = con.prepareStatement("SELECT name, detail, price, file_name FROM m_item WHERE id=" + idb.getId());
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				updatedIdb.setName(rs.getString("name"));
+				updatedIdb.setDetail(rs.getString("detail"));
+				updatedIdb.setPrice(rs.getInt("price"));
+				updatedIdb.setFileName(rs.getString("file_name"));
+			}
+
+			st.close();
+			System.out.println("searching updated-UserDataBeans has been completed");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	//itemのinsert機能//未確認
+	public static void insertItem(ItemDataBeans idb) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement(
+					"INSERT INTO m_item(name,detail,price,file_name) VALUES (?,?,?,?)");
+			st.setString(1, idb.getName());
+			st.setString(2, idb.getDetail());
+			st.setInt(3, idb.getPrice());
+			st.setString(4, idb.getFileName());
+			st.executeUpdate();
+			System.out.println("inserting item has been completed");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
 }

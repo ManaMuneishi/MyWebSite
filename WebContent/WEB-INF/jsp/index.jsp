@@ -13,7 +13,7 @@
 			<br> <br>
 			<h1 class="header center red-text">ようこそ</h1>
 			<div class="row center">
-				<h5 class="header col s12 light">なにも買えない不思議なサイトへ</h5>
+				<h5 class="header col s12 light">なんでも買える不思議なサイトへ</h5>
 			</div>
 			<div class="row center">
 				<div class="input-field col s8 offset-s2">

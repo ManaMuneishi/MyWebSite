@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <nav class="richblue" role="navigation">
 	<div class="nav-wrapper container">
-		<a id="logo-container" href="Index" class="brand-logo">EC</a>
+		<a id="logo-container" href="Index" class="brand-logo">いーしー</a>
 		<ul class="right">
 			<% boolean isLogin = session.getAttribute("isLogin")!=null?(boolean) session.getAttribute("isLogin"):false; %>
 
 			<%if(isLogin){ %>
+			<li><a href="MasterIndex"><i class="material-icons">build_outlined</i></a>あとでadminのみに直します。</li>
 			<li><a href="UserData"><i class="material-icons">account_circle</i></a></li>
 			<%}else{ %>
 			<li><a href="Regist"><i class="material-icons">add</i></a></li>

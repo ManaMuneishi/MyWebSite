@@ -40,7 +40,7 @@ public class UserData extends HttpServlet {
 			ArrayList<BuyDataBeans> UserBuyDetailList = BuyDAO.getBuyDataBeansListByUserId(userId);
 			request.setAttribute("UserBuyDetailList", UserBuyDetailList);
 
-			BuyDataBeans Data = new BuyDataBeans();//消すかどうかあとで考える。←消してみる
+			//BuyDataBeans Date = new BuyDataBeans();//消すかどうかあとで考える。←消してみる ←やっぱりいらないと思う。
 
 			request.setAttribute("udb", udb);//大事なやつ。
 

@@ -17,12 +17,9 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		session.removeAttribute("userId");//ここすぐ書けなかったところ。
+		session.setAttribute("isLogin", false);//ここなかったら無限に半分ログアウト状態続いた。(したというけどしてくれてない)
+		session.removeAttribute("userId");//ここすぐ書けなかった。
 
 		request.getRequestDispatcher(EcHelper.LOGOUT_PAGE).forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-
 }

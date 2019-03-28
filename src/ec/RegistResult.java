@@ -19,15 +19,6 @@ import dao.UserDAO;
 public class RegistResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public RegistResult() {
-        super();
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//これで登録しましたよの画面を作る、
 		//そのために、その前の処理(comfirmから受け取ったpostの処理)をする。=これでいいですかにOKしたかどうか。
@@ -46,8 +37,10 @@ public class RegistResult extends HttpServlet {
 			udb.setLoginId(inputLoginId);
 			udb.setLoginPassword(inputPassword); //ここまでcomfirmと同じ。表示するのは同じもの。udbでもらってきたもの
 
-			switch ("confirm_button") {//択一ボタンの作り方。
+			//getしてなかった
+			String confirmed = request.getParameter("confirm_button");
 
+			switch (confirmed) {//択一ボタンの作り方。//ここ違ってた
 			case "cancel":
 				session.setAttribute("udb", udb);
 				response.sendRedirect("Regist");
@@ -57,7 +50,7 @@ public class RegistResult extends HttpServlet {
 				UserDAO.insertUser(udb);
 				request.setAttribute("udb", udb);//とりあえず一回だけ返せばいいからrequestで。←違う!!←いや合ってる。
 				request.getRequestDispatcher(EcHelper.REGIST_RESULT_PAGE).forward(request, response);
-
+				break;//ここ忘れてた
 			}
 
 		} catch (Exception e) {

@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/UserBuyHistoryDetail")
 public class UserBuyHistoryDetail extends HttpServlet {
@@ -15,12 +16,19 @@ public class UserBuyHistoryDetail extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+
+		try {
+			request.setCharacterEncoding("UTF-8");
+
+			int Id = Integer.parseInt(request.getParameter("buy_id"));
 
 		request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		}catch (Exception e) {
+		e.printStackTrace();
 	}
+}
+
 
 }

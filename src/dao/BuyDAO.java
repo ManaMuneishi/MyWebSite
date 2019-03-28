@@ -18,7 +18,7 @@ public class BuyDAO {
 	 * @param bdb 購入情報
 	 * @throws SQLException 呼び出し元にスローさせるため
 	 */
-	public static int insertBuy(BuyDataBeans bdb) throws SQLException {//ここ分からん写した。
+	public static int insertBuy(BuyDataBeans bdb) throws SQLException {//ここ写した。
 		Connection con = null;
 		PreparedStatement st = null;
 		int autoIncKey = -1;
@@ -27,14 +27,14 @@ public class BuyDAO {
 			con = DBManager.getConnection();
 			st = con.prepareStatement(
 					"INSERT INTO t_buy(user_id,total_price,delivery_method_id,create_date) VALUES(?,?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);//なんだっけ←insertを検索可能にするらしい。
+					Statement.RETURN_GENERATED_KEYS);//←insertを検索可能にするらしい。//関連テーブルに、共通してるキーを返して、一緒に更新してあげる必要がある
 			st.setInt(1, bdb.getUserId());
 			st.setInt(2,bdb.getTotalPrice());
 			st.setInt(3, bdb.getDelivertMethodId());
 			st.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
 			st.executeUpdate();
 
-			ResultSet rs = st.getGeneratedKeys();
+			ResultSet rs = st.getGeneratedKeys();//ここはいつも同じ。
 			if(rs.next()) {
 				autoIncKey = rs.getInt(1);
 			}

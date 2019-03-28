@@ -38,7 +38,7 @@
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1">
-									<input type="password" name="password" value="${udb.loginPassword}" readonly> <label>パスワード</label>
+									<input type="password" name="password" value="${udb.password}" readonly> <label>パスワード</label>
 								</div>
 							</div>
 							<div class="row">

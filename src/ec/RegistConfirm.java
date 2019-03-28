@@ -12,14 +12,10 @@ import javax.servlet.http.HttpSession;
 import beans.UserDataBeans;
 import dao.UserDAO;
 
-@WebServlet("/ResistConfirm")
-public class ResistConfirm extends HttpServlet {
+@WebServlet("/RegistConfirm")
+public class RegistConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
@@ -27,21 +23,21 @@ public class ResistConfirm extends HttpServlet {
 
 		try {
 			String inputUserName = request.getParameter("user_name"); //jspのフォーム取り込む
-			String inputAddress = request.getParameter("user_address");
+			String inputUserAddress = request.getParameter("user_address");
 			String inputLoginId = request.getParameter("login_id");
-			String inputPassword = request.getParameter("password");
+			String inputLoginPassword = request.getParameter("password");
 			String inputConfirmPassword = request.getParameter("confirm_password");
 
 			UserDataBeans udb = new UserDataBeans();
 			udb.setName(inputUserName);
-			udb.setAddress(inputAddress);
+			udb.setAddress(inputUserAddress);
 			udb.setLoginId(inputLoginId);
-			udb.setLoginPassword(inputPassword);
+			udb.setLoginPassword(inputLoginPassword);
 
 			String validationMessage = "";//初期化
 
 			//パスが合ってるか確認
-			if (!inputPassword.equals(inputConfirmPassword)) {
+			if (!inputLoginPassword.equals(inputConfirmPassword)) {
 				validationMessage += "パスワードが違います";
 			}
 			//idのチェック
