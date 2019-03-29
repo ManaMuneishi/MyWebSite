@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ユーザー登録</title>
+<title>アイテム登録</title>
 <jsp:include page="/baselayout/head.html" />
 </head>
 <body>
@@ -13,7 +13,7 @@
 	<br>
 	<div class="container">
 		<div class="row center">
-			<h5 class=" col s12 light">新規登録</h5>
+			<h5 class=" col s12 light">新規アイテム登録</h5>
 			<c:if test="${validationMessage != null}">
 				<P class="red-text">${validationMessage}</P>
 			</c:if>
@@ -23,32 +23,28 @@
 			<div class="col s6 offset-s3">
 				<div class="card grey lighten-5">
 					<div class="card-content">
-						<form action="RegistConfirm" method="POST">
+						<form action="MasterNewItem" method="POST">
+						<input type="hidden" name="itemId" value="${itemDetail.id }">
+
 							<div class="row">
-								<div class="input-field col s10 offset-s1">
-									<input value="${udb.name}" name="user_name" type="text" required> <label>名前</label>
+								<div class="input-field col s6">
+									<input type="text" name="item_name" value="${itemDetail.name}"> <label>商品名</label>
 								</div>
 							</div>
 							<div class="row">
-								<div class="input-field col s10 offset-s1">
-									<input value="${udb.address}" name="user_address" type="text" required> <label>住所</label>
+								<div class="input-field col s6">
+									<input type="text" name="item_price" value="${itemDetail.price}"> <label>値段</label>
+								</div>
+								<div class="input-field col s6">
+									<input type="text" name="item_file" value="${itemDetail.fileName}"> <label>画像</label>
 								</div>
 							</div>
 							<div class="row">
-								<div class="input-field col s10 offset-s1">
-									<input value="${udb.loginId}" name="login_id" type="text" required> <label>ログインID</label>
+								<div class="input-field col s12">
+									<input type="text" name="item_detail" value="${itemDetail.detail}"> <label>詳細</label>
 								</div>
 							</div>
-							<div class="row">
-								<div class="input-field col s10 offset-s1">
-									<input  name="password" type="password" required> <label>パスワード</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col s10 offset-s1">
-									<input name="confirm_password" type="password" required> <label>パスワード（確認用）</label>
-								</div>
-							</div>
+
 							<div class="row">
 								<div class="col s12">
 									<p class="center-align">

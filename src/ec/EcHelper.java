@@ -51,13 +51,14 @@ public class EcHelper {
 	//マスターTOPページ
 	static final String MASTER_INDEX_PAGE = "/WEB-INF/jsp/masterindex.jsp";
 	//マスター商品新規登録
-	static final String MASTER_NEW_ITEM_PAGE  = "/WEB-INF/jsp/masternewitem.jsp";
+	static final String MASTER_NEW_ITEM_PAGE = "/WEB-INF/jsp/masternewitem.jsp";
 	//マスター商品新規登録確認
 	static final String MASTER_NEW_ITEM_CONF_PAGE  = "/WEB-INF/jsp/masternewitemconf.jsp";
 	//マスター商品情報変更
 	static final String MASTER_ITEM_UPDATE_PAGE = "/WEB-INF/jsp/masteritemupdate.jsp";
 	//マスター商品情報変更確認
 	static final String MASTER_ITEM_UPDATE_CONF_PAGE = "/WEB-INF/jsp/masteritemupdateconf.jsp";
+
 	//マスター商品削除確認
 	static final String MASTER_ITEM_DELETE_CONF_PAGE = "/WEB-INF/jsp/masteritemdeleteconf.jsp";
 	//マスター商品詳細
@@ -66,8 +67,12 @@ public class EcHelper {
 	static final String MASTER_ITEM_SEARCH_RESULT_PAGE = "/WEB-INF/jsp/masteritemsearchresult.jsp";
 	//マスター商品検索画面
 	static final String MASTER_ITEM_SEARCH_PAGE = "/WEB-INF/jsp/masteritemsearch.jsp";
+
 	//マスター全機能共通完了ページ
 	static final String MASTER_ALL_RESULT_PAGE = "/WEB-INF/jsp/masterallresult.jsp";
+	//マスター削除用カート
+	static final String MASTER_DELETE_CART_PAGE = "/WEB-INF/jsp/masterdeletecart.jsp";
+
 
 	public static EcHelper getInstance() {
 		return new EcHelper();

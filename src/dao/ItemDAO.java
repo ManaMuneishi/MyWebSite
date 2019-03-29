@@ -29,7 +29,7 @@ public class ItemDAO {
 
 			ResultSet rs = st.executeQuery();//実行
 
-			ArrayList<ItemDataBeans>itemList = new ArrayList<ItemDataBeans>();//箱
+			ArrayList<ItemDataBeans> itemList = new ArrayList<ItemDataBeans>();//箱
 
 			while (rs.next()) {//箱の中身
 				ItemDataBeans item = new ItemDataBeans();
@@ -42,15 +42,16 @@ public class ItemDAO {
 			}
 			System.out.println("item取れたー");
 			return itemList;
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
-		}finally {
+		} finally {
 			if (con != null) {
-				 con.close();
+				con.close();
 			}
 		}
 	}
+
 	/**
 	 * 商品IDによる商品検索
 	 * @param itemId
@@ -78,7 +79,7 @@ public class ItemDAO {
 			System.out.println("searching item by itemID has been completed");
 
 			return item;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
 		} finally {
@@ -87,6 +88,7 @@ public class ItemDAO {
 			}
 		}
 	}
+
 	/**
 	 * 商品検索
 	 * @param searchWord
@@ -95,12 +97,13 @@ public class ItemDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static ArrayList<ItemDataBeans> getItemsByItemName (String searchWord, int pageNum, int pageMaxItemCount) throws SQLException{
+	public static ArrayList<ItemDataBeans> getItemsByItemName(String searchWord, int pageNum, int pageMaxItemCount)
+			throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 
 		try {
-			int startItemNum = (pageNum -1) * pageMaxItemCount;
+			int startItemNum = (pageNum - 1) * pageMaxItemCount;
 			int PageItemEndNum = pageMaxItemCount + startItemNum;
 			con = DBManager.getConnection();
 
@@ -108,7 +111,7 @@ public class ItemDAO {
 				st = con.prepareStatement("SELECT * FROM m_item ORDER BY id ASC LIMIT ?,? ");
 				st.setInt(1, startItemNum);
 				st.setInt(2, PageItemEndNum);
-			}else {
+			} else {
 				st = con.prepareStatement("SELECT * FROM m_item WHERE name LIKE ? ORDER BY id ASC LIMIT ?,?");
 				st.setString(1, "%" + searchWord + "%");
 				st.setInt(2, startItemNum);
@@ -116,9 +119,9 @@ public class ItemDAO {
 			}
 
 			ResultSet rs = st.executeQuery();
-			ArrayList<ItemDataBeans>itemList = new ArrayList<ItemDataBeans>();
+			ArrayList<ItemDataBeans> itemList = new ArrayList<ItemDataBeans>();
 
-			while(rs.next()) {
+			while (rs.next()) {
 				ItemDataBeans item = new ItemDataBeans();
 				item.setId(rs.getInt("id"));
 				item.setName(rs.getString("name"));
@@ -130,7 +133,7 @@ public class ItemDAO {
 			System.out.println("get Items by itemName has been completed");
 			return itemList;
 
-			}catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
 		} finally {
@@ -147,7 +150,7 @@ public class ItemDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static int getItemCount(String searchWord) throws SQLException{
+	public static int getItemCount(String searchWord) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
@@ -160,7 +163,7 @@ public class ItemDAO {
 				ItemCount = Integer.parseInt(rs.getString("cnt"));
 			}
 			return ItemCount;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
 		} finally {
@@ -170,39 +173,49 @@ public class ItemDAO {
 		}
 	}
 
-	//todo:itemdelete機能// insertと似た感じだと思われる。
+	//todo:itemdelete機能// insertと似た感じだと思われる。//未確認だか書けた。
 
+	public static void deleteItem(String id) throws SQLException {
 
-
-	//itemupdateの機能 //下記参考にして直す。//未確認
-	public static void updateItem(ItemDataBeans idb) throws SQLException {
-		// 更新された情報をセットされたJavaBeansのリスト
-		ItemDataBeans updatedIdb = new ItemDataBeans();
 		Connection con = null;
 		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();//データベースに繋ぐ
+			st = con.prepareStatement("DELETE FROM m_item WHERE id = ?");
 
+			st.setString(1, id);
+			st.executeUpdate();
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+
+				}
+			}
+		}
+	}
+
+	//itemupdateの機能 ////未確認
+	public static void updateItem(ItemDataBeans idb) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
 		try {
 			System.out.println("inserting item has been completed");
 
 			con = DBManager.getConnection();
-			st = con.prepareStatement("UPDATE m_item SET name=?, detail=?, price=? file_name=? WHERE id=?;");
+			st = con.prepareStatement("UPDATE m_item SET name=?, detail=?, price=?, file_name=? WHERE id=?;");
 			st.setString(1, idb.getName());
 			st.setString(2, idb.getDetail());
 			st.setInt(3, idb.getPrice());
 			st.setString(4, idb.getFileName());
+			st.setInt(5, idb.getId());
 			st.executeUpdate();
 			System.out.println("update has been completed");
-
-			st = con.prepareStatement("SELECT name, detail, price, file_name FROM m_item WHERE id=" + idb.getId());
-			ResultSet rs = st.executeQuery();
-
-			while (rs.next()) {
-				updatedIdb.setName(rs.getString("name"));
-				updatedIdb.setDetail(rs.getString("detail"));
-				updatedIdb.setPrice(rs.getInt("price"));
-				updatedIdb.setFileName(rs.getString("file_name"));
-			}
-
 			st.close();
 			System.out.println("searching updated-UserDataBeans has been completed");
 
@@ -240,4 +253,5 @@ public class ItemDAO {
 			}
 		}
 	}
+
 }

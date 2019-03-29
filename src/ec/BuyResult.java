@@ -25,7 +25,7 @@ public class BuyResult extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		try {
-			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) EcHelper.cutSessionAttribute(session, "cart");
+			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) EcHelper.cutSessionAttribute(session, "cart");//買い終わったので一旦セッションを切り取ってぽい
 			BuyDataBeans bdb = (BuyDataBeans) EcHelper.cutSessionAttribute(session, "bdb");
 
 			int buyId = BuyDAO.insertBuy(bdb);

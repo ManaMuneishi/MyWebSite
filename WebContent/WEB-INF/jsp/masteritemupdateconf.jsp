@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ユーザー登録/入力内容確認</title>
+<title>アイテム登録/入力内容確認</title>
 <jsp:include page="/baselayout/head.html" />
 </head>
 <body>
@@ -20,25 +20,30 @@
 			<div class="col s6 offset-s3">
 				<div class="card grey lighten-5">
 					<div class="card-content">
-						<form action="RegistResult" method="POST">
+						<form action="MasterItemUpdateConf" method="POST">
 							<div class="row">
-								<div class="input-field col s10 offset-s1">
-									<input type="text" name="user_name" value="${udb.name}" readonly> <label>名前</label>
+								<div class="input-field col s10 offset-s1"><!-- ここいる！！！！！！！ -->>
+									<input type="text" name="item_id" value="${itemDetail.id}" readonly> <label>アイテムID</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1">
-									<input type="text" name="user_address" value="${udb.address}" readonly> <label>住所</label>
+									<input type="text" name="item_name" value="${itemDetail.name}" readonly> <label>商品名</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1">
-									<input type="text" name="login_id" value="${udb.loginId}" readonly> <label>ログインID</label>
+									<input type="text" name="item_price" value="${itemDetail.price}" readonly> <label>値段</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1">
-									<input type="password" name="password" value="${udb.password}" readonly> <label>パスワード</label>
+									<input type="text" name="item_file" value="${itemDetail.fileName}" readonly> <label>画像ファイル</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s10 offset-s1">
+									<input type="text" name="item_detail" value="${itemDetail.detail}" readonly> <label>詳細</label>
 								</div>
 							</div>
 							<div class="row">
@@ -49,11 +54,10 @@
 							<div class="row">
 								<div class="col s6 center-align">
 									<button class="btn  waves-effect waves-light" type="submit" name="confirm_button" value="cancel">修正</button>
-								</div>
+								</div>//ここserにて分岐必要
 								<div class="col s6 center-align">
 									<button class="btn  waves-effect waves-light" type="submit" name="confirm_button" value="regist">登録</button>
 								</div>
-
 							</div>
 						</form>
 					</div>

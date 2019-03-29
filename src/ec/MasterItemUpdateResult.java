@@ -10,20 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.ItemDataBeans;
+import dao.ItemDAO;
 
-@WebServlet("/MasterNewItemConf")
-public class MasterNewItemConf extends HttpServlet {
+@WebServlet("/MasterAllResult")
+public class MasterItemUpdateResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.getRequestDispatcher(EcHelper.MASTER_ALL_RESULT_PAGE).forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher(EcHelper.MASTER_ALL_RESULT_PAGE).forward(request, response);
 
-		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-
+		//ここに飛ばしたよー
+		HttpSession session = request.getSession(); //セッションとる
 		try {
 			String inputItemName = request.getParameter("item_name"); //jspのフォーム取り込む
 			String inputItemDetail= request.getParameter("item_detail");
@@ -36,9 +39,21 @@ public class MasterNewItemConf extends HttpServlet {
 			idb.setPrice(Integer.parseInt(inputItemPrice));
 			idb.setFileName(inputItemFile);
 
+			//getしてなかった
+			String confirm_button = request.getParameter("confirm_button");
 
-			request.setAttribute("idb", idb);
-			request.getRequestDispatcher(EcHelper.MASTER_NEW_ITEM_CONF_PAGE).forward(request, response);
+			switch (confirm_button) {
+			case "cancel":
+				session.setAttribute("idb", idb);//も一回表示してあげるように
+				response.sendRedirect("MasterItemUpdate");
+				break;
+
+			case "regist":
+				ItemDAO.insertItem(idb);
+				//OKだけのページに飛ばす
+				request.getRequestDispatcher(EcHelper.MASTER_ALL_RESULT_PAGE).forward(request, response);
+				break;//ここ忘れてた
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

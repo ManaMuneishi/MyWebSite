@@ -37,6 +37,7 @@ public class MasterItemDetail extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		//jspにel式かいて詰めてボタン動かす
 		try {
 			 int id = Integer.parseInt(request.getParameter("item_id"));
 			 String buttons = request.getParameter("action_button");

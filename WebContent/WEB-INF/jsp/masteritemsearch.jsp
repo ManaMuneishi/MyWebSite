@@ -17,7 +17,7 @@
 			</div>
 			<div class="row center">
 				<div class="input-field col s8 offset-s2">
-					<form action="MasterItemSearchResult">
+					<form action="MasterItemSearch" method="POST">
 						<i class="material-icons prefix">search</i> <input type="text" name="search_word">
 					</form>
 				</div>
@@ -28,7 +28,7 @@
 		<div class="row">
 			<div class="col s8 offset-s2">
 				<h5 class="right-align">
-					<a href="itemRegist">新規アイテム登録</a>
+					<a href="MasterNewItem">新規アイテム登録</a>
 				</h5>
 			</div>
 		</div>

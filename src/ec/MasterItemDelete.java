@@ -13,16 +13,21 @@ import javax.servlet.http.HttpSession;
 import beans.ItemDataBeans;
 import dao.ItemDAO;
 
-@WebServlet("/MasterItemDeleteCart")//ここもう間違えない。
+@WebServlet("/MasterItemDelete")//ここもう間違えない。
 
-public class MasterItemDeleteCart extends HttpServlet {
+public class MasterItemDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// アイテムIDをリクエストから取得
+		// アイテムIDをリクエストにセット
+		String itemId = request.getParameter("itemId");
+		// MasterItemDeleteConf.javaにリダイレクト
+		response.sendRedirect("MasterItemDeleteConf?itemId=" + itemId);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//ここに飛ばしたー
+	//ここに飛ばしたー//post!!!post!!!
 
 		HttpSession session = request.getSession();
 		try {
@@ -33,7 +38,7 @@ public class MasterItemDeleteCart extends HttpServlet {
 			request.setAttribute("item", item);
 
 			//下記一行絶対違う。←直しました
-			//アドミンは買い物しない＝カートいらない＝このカートをdelete用に使おう!!
+			//アドミンは買い物しない＝カートいらない＝このカートをdelete用に使おう!!←やめた。一気にデリートは難しい。
 			ArrayList<ItemDataBeans> delete_cart = (ArrayList<ItemDataBeans>)session.getAttribute("cart");
 
 			if (delete_cart == null) {

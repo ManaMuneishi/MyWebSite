@@ -15,25 +15,21 @@
 			<div class="col s6 offset-s3">
 				<div class="card grey lighten-5">
 					<div class="card-content">
-						<form action="MasterItemSearch" method="POST">
 							<div class="row">
 								<div class="col s12">
 									<p class="center-align">
-										<button class="btn btn-large waves-effect waves-light  col s8 offset-s2" type="submit" name="itemlist">アイテム検索</button>
+									<a class="btn btn-primary" href="MasterItemSearch">アイテム管理</a>
+									</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col s12">
+									<p class="center-align">
+									<a class="btn btn-primary" href="">ユーザ管理</a>//ここあとでたす
 									</p>
 								</div>
 							</div>
 						</form>
-						<form action="" method="POST">//ここあとでたす
-							<div class="row">
-								<div class="col s12">
-									<p class="center-align">
-										<button class="btn btn-large waves-effect waves-light  col s8 offset-s2" type="submit" name="userlist">ユーザ検索</button>
-									</p>
-								</div>
-							</div>
-						</form>
-
 					</div>
 				</div>
 			</div>

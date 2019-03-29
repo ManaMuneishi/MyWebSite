@@ -20,25 +20,31 @@
 			<div class="col s6 offset-s3">
 				<div class="card grey lighten-5">
 					<div class="card-content">
-						<form action="RegistResult" method="POST">
+						<form action="MasterNewItemResult" method="POST">
+
 							<div class="row">
 								<div class="input-field col s10 offset-s1">
-									<input type="text" name="user_name" value="${udb.name}" readonly> <label>名前</label>
+									<input type="text" name="item_id" value="${idb.id}" readonly> <label>アイテムID</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1">
-									<input type="text" name="user_address" value="${udb.address}" readonly> <label>住所</label>
+									<input type="text" name="item_name" value="${idb.name}" readonly> <label>商品名</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1">
-									<input type="text" name="login_id" value="${udb.loginId}" readonly> <label>ログインID</label>
+									<input type="text" name="item_price" value="${idb.price}" readonly> <label>値段</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1">
-									<input type="password" name="password" value="${udb.password}" readonly> <label>パスワード</label>
+									<input type="text" name="item_file" value="${idb.fileName}" readonly> <label>画像ファイル</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s10 offset-s1">
+									<input type="text" name="item_detail" value="${idb.detail}" readonly> <label>詳細</label>
 								</div>
 							</div>
 							<div class="row">
